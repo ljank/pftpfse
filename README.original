@@ -1,0 +1,64 @@
+Please report bugs to godzhirra@one.lt. Suggestions are very wellcome too ;] Thanks
+
+Requirements:
+	perl ( 5.8.0 recommended, cause i've tested this only with 5.8.0 );
+	perl modules:
+		Net::FTP (comes with libnet package)
+		Net::Ping (comes with libnet package)
+		POSIX (part of default perl package)
+		Term::ReadLine (should be by default)
+
+Installation
+	With root run 'make' or install perl modules manually. Then 'make install'. Now you can run program by typing 'pftpfse.pl'
+
+server.list:
+	This file contains list of FTP servers from which is getted all info. Valid syntax is:
+
+		127.0.0.1
+		user:password@127.0.0.1
+		hostname.org
+		user:password@hostname.org
+		127.0.0.1:56
+		user:password@hostname:other_port
+		user:password@host_or_ip:other_port/special_dir
+
+pftpfse.scaner.pl:
+	Special scanner for scanning LAN, searching for anonymous ftp servers.
+	Usage: pftpfse.scaner.pl 10.1-5.1-9.x (x means 0-255).
+	Valid syntaxes:
+		x.x.x.x (same as 0-255.0-255.0-255.0-255)
+		10.1,3,5.1-5,9-11.1-66,88-255
+		10.1.1.x
+
+	Use --no-debug (-nd) and --ftp-debug (-fd) for debugging.
+	This script will search for local ftp servers, which will automatically
+	append into ~/.pftpfse/server.list
+
+Useful tip:
+	Use cron (man cron) to automatically update your files database with pftpfse.update.pl script. Use --no-debug key, which will turn off outputing.
+
+How to install perl modules?
+	Got cpan? If not, then run this:
+
+		perl -e 'install CPAN'
+
+	If got cpan follow these instructions: For manual modules installing type:
+
+		perl -MCPAN -e 'install Module_name'
+
+	Example: perl -MCPAN -e 'install Config::Tiny'
+
+	or:
+
+		cpan -i Module_name
+
+	Example: cpan -i Config::Tiny
+
+	This will install modules automatically. For more info type 'man cpan'.
+
+Special thanks to:
+	Larry Wall for perl ;]
+	pai_mai_siu for interesting ideas and skins developing
+	niekas @ irc2.omnitel.net for suggesting --since;
+	donis for suggesting keywords for find --since and for aliases;
+	SStorm for suggesting find --links;

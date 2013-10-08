@@ -1,0 +1,151 @@
+Changes for 0.0.10:
+* 2003-07-12:
+	* prompt keys: %T, %t, %/, %p, %v;
+	* added command 'prompt' for easier prompt managing; `help prompt` for more info; alias - p;
+	* fixed pftpfse.scaner.pl pinging bug: now uses different procotols; new variable in conf: scan_protocol;
+	* changed Net::FTP downloading interface;
+	* if file allready exists, then script asks to overwrite or rename;
+	* now you are able to fetch files with wget, which is more powerfull download manager; checkout new variables in conf: wget, download_manager;
+	* corrected release checker;
+	* extended commands regex'es, to make work easier;
+* 2003-07-11:
+	* fixed pftpfse.update.pl passive bug [thanks to donis];
+	* fixed 'find --ext' case-sensitive bug;
+
+Changes for 0.0.9:
+* 2003-07-08
+	* new variables in config: scan_username, scan_anon_passwd, scan_port, ftp_username, ftp_password, ftp_port;
+	* 'conf default key' to use default keys value;
+	* new variables in config: scan_timeout, ftp_timeout, ftp_debug;
+	* checks for variables in config; if something not found, then script automatically adds default values;
+	* added pftpfse.scaner.pl for scanning LAN; checkout README and `help scan` for more info;
+* 2003-07-07
+	* added 'conf' command to view and edit configuration; `help conf` for more info;
+	* added ~/.pftpfse/config file to hold config data;
+	* asks for overwrite permission if file allready exists;
+	* shows where was downloaded file;
+	* added --links key into 'results' command; filename shown by default, and full link if --links is specified;
+	* hidden passwords showing results due a security reason;
+	* added 'server empty' to empty server list;
+	* fixed 'server del' command bug: was case-sensitive;
+	* added pftpfse.common.pl to make source shorter;
+* 2003-07-05
+	* server.list can now contain comments; each comment begins with #
+* 2003-06-29
+	* added new 'find' key: --dir; this one is to search for directories; syntax: find --dir dirname;
+	* fixed results bug: showed old entries;
+
+Changes for 0.0.8:
+* 2003-06-28
+	* added new features to command 'find': --links to view full link to file [by default shows only filename; --since [ keyword | yyyy[.-/]mm[.-/]dd | mm[.-/]dd ] to search for files since given date; 'help find' for more info;
+* 2003-06-25
+	* fully rewritten help algorythm;
+	* fixed commands 'last' bug: searched for files.db in current path [thanks to niekas];
+* 2003-06-24
+	* now you are able to set default downloads directory into which should be downloaded all your requested files; if shell variable PFTPFSE_DOWNLOADS_DIR is not set, then files will be downloaded into current directory; type this into command line to get effect: export PFTPFSE_DOWNLOADS_DIR="~/my_downloads"; you can use your ~/.bashrc or ~/.login or other script to export variables;
+	* corrected downloading: reports error messages if something goes wrong;
+
+Changes for 0.0.7:
+* 2003-06-24
+	* now you are able to change prompt ' > ' to whatever you want; to do this just export PFTPFSE_PROMPT variable by doing like this: export PFTPFSE_PROMPT=" whatever >> "; use your ~/.bashrc or ~/.login or other scripts to export this variable automatically; and sorry, but this feature is only for unix-like operating systems users;
+	* added --ftp-debug and -fd keys into pftpfse.update.pl script; this will allow you to see what is going on rigt now; usage: pftpfse.update.pl --ftp-debug;
+	* added --no-debug and -nd keys into pftpfse.update.pl script; this one is to turn on/off debug mode updating database; usage: pftpfse.update.pl --no-debug; this is useful for cron to hide messages;
+	* removed $info{CONFIG};
+	* corrected server add syntax;
+	* command line interface uses now Term::ReadLine which supports history and backspace works fine;
+	* commands are not case-sensitive anymore;
+
+Changes for 0.0.6:
+* 2003-06-23
+	* added command 'last' to check out when was database last updated; alias - 'l';
+	* added commands aliases;
+* 2003-06-21
+	* fixed quoting warning, which is visible only on win32 using activeperl;
+	* corrected new file list getting algorythm and removed server files duplication bug;
+* 2003-06-19
+	* changed file list getting algorythm, which supports all (hope so;) ftp deamons;
+
+Changes for 0.0.5:
+* 2003-06-14
+	* extended command 'get'; now you can fetch whole directory: get --whole-dir $num, where $num is number from results; program will fetch directory and recursivly all files in it;
+	* added command 'check' to checkout for new releases;
+	* added command 'version' to see current version;
+	* fixed get bug: now downloads in binary mode [thanks to wu2ftpd];
+	* extended function get: get 1,3,5,7 - gets files shown in results marked as 1, 3, 5 and 7;
+	* fixed quotas escaping bug: this was needed by mysql;
+	* win32 users can now enjoy this soft too;
+
+Changes for 0.0.4:
+* 2003-06-14
+	* no more install.sh and modules.sh - i've wrote Makefile for that crap; binary files ar hold now not in ~/bin anymore, but in /usr/local/bin, so you must be root to install;
+	* drwx------ (0700) for ~/.pftpfse; -rw------- (0600) for files.db and server.list;
+	* added command 'pwd', to see what current dir is now;
+	* added command 'lcd', to change current working dir;
+	* changed 'server del' command: if deleted all servers, then script just empty the server.list;
+	* server.list and files.db are now created in perl script;
+* 2003-06-13
+	* known bugs: doesn't understand serv-u ftp deamon request reply;
+	* extended command 'get': now you can specify what to download at once, i.e.: get 1-15 - gets files shown in results from 1 to 15;
+* 2003-06-12
+	* fixed bug: not valid file adding from root dir (/); now adds correctly;
+	* now you can specify special directory, then files will be getted _only_ from that directory; to do this just use this syntax: user:pass@server:port/path/to/special/dir; [only server is required, everything else - opt];
+	* from now you can search in different styles: find - outputs all files; find --ext mp3 - outputs all files with mp3 extention; find crap - outputs files named *crap*;
+
+Changes for 0.0.3:
+* 2003-06-12
+	* extended 'find' command - now you can specify extention to search for; syntax: find file --ext extention;
+	* http://pftpfse.sf.net/ approved! ;]
+	* atlast fixed all server deleting bugs;
+	* changed algorythm with holding and parsing files.db data; now everything works very well;
+	* changed data holdint structure in files.db;
+	* now directory can be called whatever you want - will match anyway;
+	* extended message after update: shows how many files found;
+	* fixed dirs and files bug - added lots of super duper chars into regex'es;
+
+Changes for 0.0.2:
+* 2003-06-11
+	* rewrited Changelog;
+	* fixed server.list bug: now server.list is empty (0 bytes) by default [thanks to wu2ftpd];
+	* fixed bug: needs passive mode to get data from remote servers;
+	* my.ini not needed anymore;
+	* added useful tip into README ;]
+	* MySQL is not needed anymore! all data is holden in ~/.pftpfse/files.db;
+	* install.sh asks for backup; if yes, then backups old config-files;
+	* written help for command 'server';
+	* added some phrases;
+	* added 'server [ add | del | list ]' command;
+	* shows file size in kilobytes;
+	* fixed bug: didn't download files with spaces or []() in filename;
+	* rewrited install.sh [thanks to wu2ftpd];
+	* my.ini permissions changed to -rw------- (600), cause users can't edit my.ini;
+	* fixed lots of stupid lil' bugs ;]
+	* added command 'empty' to empty database;
+
+Changes for 0.0.1:
+* 2003-06-10
+	* command 'get' works fine; syntax - get int;
+	* added command 'results' to see last results;
+	* command 'find' works fine; temporary syntax - find filename;
+	* fixed quotas bug - now escapes before inserting into database;
+	* gets file size too;
+* 2003-06-09
+	* shows delay time in seconds;
+	* my.ini has now -r-------- (400) permissions due a security reason;
+	* ~/.pftpfse - holds data: my.ini, server.list;
+	* install.sh script - automatic installation;
+* 2003-06-08
+	* CLI functions: help, find, get, quit;
+
+TODO:
+	* web-based interface with php/perl
+	* gui with gtk/wx or smthn
+	* bold in help
+	* DTD valid help.xml
+	* show how many percents downloaded
+	* tips on start
+	* percents: getfilesize / x% = remote / 100%; sleep 1;
+	* multidownloading;
+	* search with regex;
+	* irssi, xchat scripts to show links to other people;
+	* search.cpan.org: http deamons or smthn;
+	* prompt format; %t - hh:mm, %T - hh:mm:ss, %p - pwd; %B - bold on, %b - bold off, %C# - color num, etc;
